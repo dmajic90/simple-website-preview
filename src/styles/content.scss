@@ -1,0 +1,10 @@
+.content-section {
+  min-height: 100vh;
+  padding-top: 60px;
+}
+@media (min-width: 992px) {
+  .content-section {
+    padding-top: 0;
+    padding-left: $sidebar-base-width;
+  }
+}
