@@ -49,7 +49,7 @@ export default class Navigation extends Component {
           <span className='d-none d-lg-block'>
             <img
               className='img-fluid img-logo rounded-circle mx-auto mb-2'
-              src={require('../img/logo-placeholder.png')}
+              src={require('../img/logo.png')}
               alt=''
             />
           </span>
