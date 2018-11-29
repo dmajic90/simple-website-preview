@@ -40,19 +40,12 @@ export default class Navigation extends Component {
     return (
       <Navbar id='sideNav' color='primary' dark expand='lg' fixed='top'>
         <NavbarBrand
-          href='#about'
+          href='#'
           onClick={e => {
-            this.handleClick(e, 'about');
+            e.preventDefault();
           }}
         >
-          <span className='d-block d-lg-none'>Company name</span>
-          <span className='d-none d-lg-block'>
-            <img
-              className='img-fluid img-logo rounded-circle mx-auto mb-2'
-              src={require('../img/logo.png')}
-              alt=''
-            />
-          </span>
+          <span className='d-block '>MENU</span>
         </NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
@@ -69,32 +62,32 @@ export default class Navigation extends Component {
             </NavItem>
             <NavItem>
               <NavLink
-                href='#products'
+                href='#search'
                 onClick={e => {
-                  this.handleClick(e, 'products');
+                  this.handleClick(e, 'search');
                 }}
               >
-                Products
+                Search
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink
-                href='#reviews'
+                href='#list'
                 onClick={e => {
-                  this.handleClick(e, 'reviews');
+                  this.handleClick(e, 'list');
                 }}
               >
-                Reviews
+                List
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink
-                href='#contact'
+                href='#disclaimer'
                 onClick={e => {
-                  this.handleClick(e, 'contact');
+                  this.handleClick(e, 'disclaimer');
                 }}
               >
-                Contact
+                Disclaimer
               </NavLink>
             </NavItem>
           </Nav>
