@@ -2,8 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Row, Col, Button } from 'reactstrap';
+import { addToList } from '../actions/listActions';
 
 class SearchResults extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+
+    this.handleAddToList = this.handleAddToList.bind(this);
+  }
+
+  handleAddToList(e) {
+    e.preventDefault();
+    this.props.addToList(e.currentTarget.name);
+  }
+
   render() {
     const results = this.props.results.map(result => (
       <Row key={result.show.id} className='border-bottom border-primary'>
@@ -18,7 +31,12 @@ class SearchResults extends Component {
           </span>
         </Col>
         <Col className='d-none d-lg-block text-center col-2'>
-          <Button color='primary' className='my-1'>
+          <Button
+            color='primary'
+            className='my-1'
+            name={result.show.id}
+            onClick={this.handleAddToList}
+          >
             Add
           </Button>
         </Col>
@@ -26,6 +44,8 @@ class SearchResults extends Component {
           <Button
             color='primary'
             className='d-inline-block my-1 btn-block button-limit'
+            name={result.show.id}
+            onClick={this.handleAddToList}
           >
             +
           </Button>
@@ -57,4 +77,7 @@ SearchResults.propTypes = {
 
 const mapStateToProps = state => ({ results: state.results.items });
 
-export default connect(mapStateToProps)(SearchResults);
+export default connect(
+  mapStateToProps,
+  { addToList }
+)(SearchResults);

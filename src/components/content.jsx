@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import SearchResults from './searchResults';
 import SearchForm from './searchForm';
+import ListPreview from './listPreview';
 
 export default class Content extends Component {
   constructor(props) {
@@ -43,6 +44,7 @@ export default class Content extends Component {
           <div className='content-wrapper my-auto text-left'>
             <SearchForm />
             <SearchResults />
+            <ListPreview />
           </div>
         </section>
         <hr />
