@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Input } from 'reactstrap';
 import { fetchResults } from '../actions/searchActions.js';
 
 class SearchForm extends Component {
@@ -26,20 +26,23 @@ class SearchForm extends Component {
 
   render() {
     return (
-      <Form>
+      <Form inline onSubmit={this.handleSearch}>
         <FormGroup>
-          <Label for='showSearch'>Search</Label>
           <Input
             type='search'
             name='search'
-            id='showSearch'
+            aria-label='Search'
             value={this.state.value}
             onChange={this.handleChange}
             placeholder='Enter show name here'
           />
         </FormGroup>
-        <Button color='primary' onClick={this.handleSearch}>
-          Submit
+        <Button
+          color='primary'
+          className='ml-1 form-group'
+          onClick={this.handleSearch}
+        >
+          Search
         </Button>
       </Form>
     );
