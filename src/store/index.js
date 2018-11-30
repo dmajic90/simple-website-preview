@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from '../reducers/reducers';
 import thunk from 'redux-thunk';
 
@@ -7,9 +7,7 @@ const initialState = {};
 const middleware = [thunk];
 
 export const store = createStore(
-  combineReducers({
-    state: reducers
-  }),
+  reducers,
   initialState,
   compose(
     applyMiddleware(...middleware),

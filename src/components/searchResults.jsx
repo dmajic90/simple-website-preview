@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 class SearchResults extends Component {
   render() {
     const results = this.props.results.map(result => (
-      <div key={result.id}>
-        <h3>{result.show.title}</h3>
+      <div key={result.show.id}>
+        <h3>{result.show.name}</h3>
       </div>
     ));
     return <div>{results}</div>;
