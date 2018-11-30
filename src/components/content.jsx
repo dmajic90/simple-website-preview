@@ -42,8 +42,17 @@ export default class Content extends Component {
         <hr />
         <section id='search' className='content-section d-flex d-column'>
           <div className='content-wrapper my-auto text-left'>
+            <div className='content-subhead my-3 text-secondary'>
+              Search our show database
+            </div>
             <SearchForm />
+            <div className='content-subhead my-3 text-secondary'>
+              Search results
+            </div>
             <SearchResults />
+            <div className='content-subhead my-3 text-secondary'>
+              Create your list
+            </div>
             <ListPreview />
           </div>
         </section>

@@ -55,11 +55,6 @@ class SearchResults extends Component {
 
     return (
       <Container fluid className='mt-5'>
-        <Row>
-          <Col className='bg-primary text-white text-center'>
-            Search results
-          </Col>
-        </Row>
         <Row className='bg-primary text-white text-center my-1'>
           <Col>Title</Col>
           <Col className='d-none d-lg-block col-2'>Year</Col>

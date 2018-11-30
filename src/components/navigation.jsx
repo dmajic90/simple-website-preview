@@ -67,7 +67,7 @@ export default class Navigation extends Component {
                   this.handleClick(e, 'search');
                 }}
               >
-                Search
+                Search and create
               </NavLink>
             </NavItem>
             <NavItem>
