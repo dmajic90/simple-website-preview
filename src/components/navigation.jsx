@@ -72,12 +72,12 @@ export default class Navigation extends Component {
             </NavItem>
             <NavItem>
               <NavLink
-                href='#list'
+                href='#lists'
                 onClick={e => {
-                  this.handleClick(e, 'list');
+                  this.handleClick(e, 'lists');
                 }}
               >
-                List
+                Lists
               </NavLink>
             </NavItem>
             <NavItem>
