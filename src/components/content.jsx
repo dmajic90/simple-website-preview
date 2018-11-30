@@ -10,7 +10,7 @@ export default class Content extends Component {
   }
   render() {
     return (
-      <Container fluid={true}>
+      <Container fluid>
         <section id='about' className='content-section d-flex d-column'>
           <div className='content-wrapper my-auto text-left'>
             <h1 className='content-title m-0'>
@@ -24,28 +24,34 @@ export default class Content extends Component {
             </div>
             <div className='content-text text-secondary my-5'>
               Here you can create a list of your favorite TV shows or take a
-              look at some of the lists made by other users. <br />
+              look at some of the premade lists. <br />
               <br />
-              Creating your own list is done in the SEARCH section
+              Create your list by going to the SEARCH section, finding the shows
+              you want and adding them to your list.
               <br />
-              Lists made by others can be found in the LIST section.
+              Once you save the list it can be found and edited in the LISTS
+              section along with some premade ones.
+              <br />
+              <br />
+              This project was created by D.Majic as a way to learn more about
+              frontend development.
             </div>
           </div>
         </section>
         <hr />
         <section id='search' className='content-section d-flex d-column'>
-          <div className='my-auto text-left'>
+          <div className='content-wrapper my-auto text-left'>
             <SearchForm />
             <SearchResults />
           </div>
         </section>
         <hr />
-        <section id='list' className='content-section d-flex d-column'>
-          <div className='my-auto text-left'>List</div>
+        <section id='lists' className='content-section d-flex d-column'>
+          <div className='content-wrapper my-auto text-left'>Lists</div>
         </section>
         <hr />
         <section id='disclaimer' className='content-section d-flex d-column'>
-          <div className='my-auto text-left'>
+          <div className='content-wrapper my-auto text-left'>
             <div className='content-subhead mb-3 text-secondary'>
               Disclaimer
             </div>
@@ -53,8 +59,8 @@ export default class Content extends Component {
               This project was made as proof of concept and should not be used
               commercially.
               <br />
-              The API used in this project can be found{' '}
-              <a href='http://www.tvmaze.com/api'>here</a>.
+              The API used in this project was provided by TVmaze and it can be
+              found <a href='http://www.tvmaze.com/api'>here</a>.
             </div>
           </div>
         </section>
