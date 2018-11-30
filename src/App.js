@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/index.js';
 import Navigation from './components/navigation';
 import Content from './components/content';
-import NoMatch from './components/NoMatch';
+import NoMatch from './components/noMatch';
 
 class App extends Component {
   render() {
