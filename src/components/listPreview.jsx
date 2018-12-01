@@ -2,11 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Row, Col, Button } from 'reactstrap';
+import { removeFromList } from '../actions/listActions';
 
 class ListPreview extends Component {
   constructor(props) {
     super(props);
     this.state = { listName: '' };
+
+    this.handleRemoveFromList = this.handleRemoveFromList.bind(this);
+  }
+
+  handleRemoveFromList(e) {
+    e.preventDefault();
+    const name = e.currentTarget.name;
+    this.props.removeFromList(name);
   }
 
   render() {
@@ -21,7 +30,12 @@ class ListPreview extends Component {
           </span>
         </Col>
         <Col className='d-none d-lg-block text-center col-2'>
-          <Button color='primary' className='my-1'>
+          <Button
+            color='primary'
+            className='my-1'
+            name={item.show.id}
+            onClick={this.handleRemoveFromList}
+          >
             Remove
           </Button>
         </Col>
@@ -29,6 +43,8 @@ class ListPreview extends Component {
           <Button
             color='primary'
             className='d-inline-block my-1 btn-block button-limit'
+            name={item.show.id}
+            onClick={this.handleRemoveFromList}
           >
             -
           </Button>
@@ -55,8 +71,10 @@ ListPreview.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  listItems: state.results.listItems,
-  results: state.results.items
+  listItems: state.results.listItems
 });
 
-export default connect(mapStateToProps)(ListPreview);
+export default connect(
+  mapStateToProps,
+  { removeFromList }
+)(ListPreview);

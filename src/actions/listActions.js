@@ -1,8 +1,11 @@
-import { ADD_TO_LIST } from './types.js';
+import { ADD_TO_LIST, REMOVE_FROM_LIST } from './types.js';
 
-let nextListID = 0;
 export const addToList = showID => ({
   type: ADD_TO_LIST,
-  payload: showID,
-  id: nextListID++
+  payload: showID
+});
+
+export const removeFromList = showID => ({
+  type: REMOVE_FROM_LIST,
+  payload: showID
 });
