@@ -18,6 +18,7 @@ export default function(state = initialState, action) {
         ...state,
         items: addVisible.map(el => ({ ...el, visible: true }))
       };
+
     case ADD_TO_LIST:
       return {
         ...state,
@@ -28,6 +29,7 @@ export default function(state = initialState, action) {
           })
         ]
       };
+
     case REMOVE_FROM_LIST:
       return {
         ...state,
@@ -35,6 +37,7 @@ export default function(state = initialState, action) {
           return item.show.id !== Number(action.payload);
         })
       };
+
     case UPDATE_SEARCH_RESULTS:
       return {
         ...state,

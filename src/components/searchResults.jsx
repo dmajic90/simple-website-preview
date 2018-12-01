@@ -18,7 +18,9 @@ class SearchResults extends Component {
     const newState = this.props.results.find(el => el.show.id === Number(name));
     newState.visible = false;
     this.setState(newState);
-    this.props.addToList(name);
+    if (!this.props.listItems.find(item => item.show.id === Number(name))) {
+      this.props.addToList(name);
+    }
   }
 
   render() {
@@ -77,7 +79,10 @@ SearchResults.propTypes = {
   results: PropTypes.array.isRequired
 };
 
-const mapStateToProps = state => ({ results: state.results.items });
+const mapStateToProps = state => ({
+  results: state.results.items,
+  listItems: state.results.listItems
+});
 
 export default connect(
   mapStateToProps,
