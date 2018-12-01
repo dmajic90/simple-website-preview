@@ -19,7 +19,14 @@ class ListPreview extends Component {
   }
 
   render() {
-    const listItems = this.props.listItems.map(item => (
+    function compare(a, b) {
+      if (a.show.name < b.show.name) return -1;
+      if (a.show.name > b.show.name) return 1;
+      return 0;
+    }
+
+    const sortedProps = this.props.listItems.sort(compare);
+    const listItems = sortedProps.map(item => (
       <Row key={item.show.id} className='border-bottom border-primary'>
         <Col className='text-left'>
           <span className='d-inline-block aligned-mid'>{item.show.name}</span>
