@@ -1,4 +1,4 @@
-import { SAVE_RESULTS } from './types.js';
+import { SAVE_RESULTS, UPDATE_SEARCH_RESULTS } from './types.js';
 import axios from 'axios';
 
 export const fetchResults = searchText => dispatch => {
@@ -11,3 +11,8 @@ export const fetchResults = searchText => dispatch => {
       })
     );
 };
+
+export const updateSearchResults = updatedState => ({
+  type: UPDATE_SEARCH_RESULTS,
+  payload: updatedState
+});

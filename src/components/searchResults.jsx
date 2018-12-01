@@ -14,12 +14,19 @@ class SearchResults extends Component {
 
   handleAddToList(e) {
     e.preventDefault();
-    this.props.addToList(e.currentTarget.name);
+    const name = e.currentTarget.name;
+    const newState = this.props.results.find(el => el.show.id === Number(name));
+    newState.visible = false;
+    this.setState(newState);
+    this.props.addToList(name);
   }
 
   render() {
     const results = this.props.results.map(result => (
-      <Row key={result.show.id} className='border-bottom border-primary'>
+      <Row
+        key={result.show.id}
+        className={result.visible ? 'border-bottom border-primary' : 'd-none'}
+      >
         <Col className='text-left'>
           <span className='d-inline-block aligned-mid'>{result.show.name}</span>
         </Col>

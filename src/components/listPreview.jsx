@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Row, Col, Button } from 'reactstrap';
 import { removeFromList } from '../actions/listActions';
+import { updateSearchResults } from '../actions/searchActions';
 
 class ListPreview extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class ListPreview extends Component {
   handleRemoveFromList(e) {
     e.preventDefault();
     const name = e.currentTarget.name;
+    this.props.updateSearchResults(name);
     this.props.removeFromList(name);
   }
 
@@ -78,10 +80,11 @@ ListPreview.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  listItems: state.results.listItems
+  listItems: state.results.listItems,
+  results: state.results.items
 });
 
 export default connect(
   mapStateToProps,
-  { removeFromList }
+  { removeFromList, updateSearchResults }
 )(ListPreview);
