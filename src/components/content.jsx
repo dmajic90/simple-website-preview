@@ -3,6 +3,7 @@ import { Container } from 'reactstrap';
 import SearchResults from './searchResults';
 import SearchForm from './searchForm';
 import ListPreview from './listPreview';
+import ListDisplay from './listDisplay';
 
 export default class Content extends Component {
   constructor(props) {
@@ -58,7 +59,10 @@ export default class Content extends Component {
         </section>
         <hr />
         <section id='lists' className='content-section d-flex d-column'>
-          <div className='content-wrapper my-auto text-left'>Lists</div>
+          <div className='content-wrapper my-auto text-left'>
+            <div className='content-subhead my-3 text-secondary'>Lists</div>
+            <ListDisplay />
+          </div>
         </section>
         <hr />
         <section id='disclaimer' className='content-section d-flex d-column'>

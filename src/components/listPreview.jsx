@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container, Row, Col, Button } from 'reactstrap';
-import { removeFromList } from '../actions/listActions';
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  Input
+} from 'reactstrap';
+import {
+  removeFromList,
+  saveNewList,
+  resetSearchAndPreview
+} from '../actions/listActions';
 import { updateSearchResults } from '../actions/searchActions';
 
 class ListPreview extends Component {
@@ -11,13 +23,40 @@ class ListPreview extends Component {
     this.state = { listName: '' };
 
     this.handleRemoveFromList = this.handleRemoveFromList.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleSaveList = this.handleSaveList.bind(this);
+  }
+
+  handleNameChange(e) {
+    this.setState({ listName: e.target.value });
   }
 
   handleRemoveFromList(e) {
     e.preventDefault();
     const name = e.currentTarget.name;
+
     this.props.updateSearchResults(name);
     this.props.removeFromList(name);
+  }
+
+  handleSaveList(e) {
+    e.preventDefault();
+    const newList = {
+      listID: this.props.lists.slice(-1)[0].listID + 1,
+      listName: this.state.listName,
+      listShows: this.props.listItems.map(item => {
+        let list = {};
+        list.name = item.show.name;
+        list.id = item.show.id;
+        list.year = item.show.premiered
+          ? item.show.premiered.slice(0, 4)
+          : 'Unknown';
+        return list;
+      })
+    };
+    this.props.saveNewList(newList);
+    this.props.resetSearchAndPreview();
+    this.setState({ listName: '' });
   }
 
   render() {
@@ -40,7 +79,7 @@ class ListPreview extends Component {
         </Col>
         <Col className='d-none d-lg-block text-center col-2'>
           <Button
-            color='primary'
+            color='danger'
             className='my-1'
             name={item.show.id}
             onClick={this.handleRemoveFromList}
@@ -50,7 +89,7 @@ class ListPreview extends Component {
         </Col>
         <Col className='d-block d-lg-none text-center col-4'>
           <Button
-            color='primary'
+            color='danger'
             className='d-inline-block my-1 btn-block button-limit'
             name={item.show.id}
             onClick={this.handleRemoveFromList}
@@ -63,13 +102,34 @@ class ListPreview extends Component {
 
     return (
       <Container fluid className='mt-5'>
-        <Row className='bg-primary text-white text-center my-1'>
-          <Col>Title</Col>
-          <Col className='d-none d-lg-block col-2'>Year</Col>
-          <Col className='d-none d-lg-block col-2'>Remove</Col>
-          <Col className='d-block d-lg-none text-center col-4'>Remove</Col>
-        </Row>
-        {listItems}
+        <Form onSubmit={this.handleSaveList}>
+          <Row className='bg-primary text-white text-center my-1'>
+            <Col>Title</Col>
+            <Col className='d-none d-lg-block col-2'>Year</Col>
+            <Col className='d-none d-lg-block col-2'>Remove</Col>
+            <Col className='d-block d-lg-none text-center col-4'>Remove</Col>
+          </Row>
+          {listItems}
+          <Row className='my-3'>
+            <FormGroup>
+              <Input
+                type='search'
+                name='listName'
+                aria-label='List name'
+                value={this.state.listName}
+                onChange={this.handleNameChange}
+                placeholder='Enter list name here'
+              />
+            </FormGroup>
+            <Button
+              color='primary'
+              className='ml-1 form-group'
+              onClick={this.handleSaveList}
+            >
+              Save list
+            </Button>
+          </Row>
+        </Form>
       </Container>
     );
   }
@@ -81,10 +141,11 @@ ListPreview.propTypes = {
 
 const mapStateToProps = state => ({
   listItems: state.results.listItems,
-  results: state.results.items
+  results: state.results.items,
+  lists: state.results.lists
 });
 
 export default connect(
   mapStateToProps,
-  { removeFromList, updateSearchResults }
+  { removeFromList, updateSearchResults, saveNewList, resetSearchAndPreview }
 )(ListPreview);

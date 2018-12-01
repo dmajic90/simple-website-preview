@@ -22,6 +22,7 @@ class SearchForm extends Component {
   handleSearch(e) {
     e.preventDefault();
     this.props.fetchResults(this.state.value);
+    this.setState({ value: '' });
   }
 
   render() {
