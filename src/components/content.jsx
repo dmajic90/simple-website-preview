@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
-import SearchResults from './searchResults';
-import SearchForm from './searchForm';
-import ListPreview from './listPreview';
+
 import ListDisplay from './listDisplay';
+import ListPreview from './listPreview';
+import SearchForm from './searchForm';
+import SearchResults from './searchResults';
 
 export default class Content extends Component {
   constructor(props) {

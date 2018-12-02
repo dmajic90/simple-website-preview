@@ -1,13 +1,13 @@
 import {
-  SAVE_RESULTS,
   ADD_TO_LIST,
-  REMOVE_FROM_LIST,
-  UPDATE_SEARCH_RESULTS,
-  SAVE_NEW_LIST,
-  RESET_SEARCH_PREVIEW,
-  REMOVE_FROM_SAVED_LIST,
+  ADD_TO_SAVED_LIST,
   DELETE_LIST,
-  ADD_TO_SAVED_LIST
+  REMOVE_FROM_LIST,
+  REMOVE_FROM_SAVED_LIST,
+  RESET_SEARCH_PREVIEW,
+  SAVE_NEW_LIST,
+  SAVE_RESULTS,
+  UPDATE_SEARCH_RESULTS
 } from '../actions/types';
 
 const initialState = {
@@ -86,13 +86,6 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case SAVE_RESULTS:
-      const addVisible = [...action.payload];
-      return {
-        ...state,
-        items: addVisible.map(el => ({ ...el, visible: true }))
-      };
-
     case ADD_TO_LIST:
       return {
         ...state,
@@ -102,61 +95,6 @@ export default function(state = initialState, action) {
             return item.show.id === Number(action.payload);
           })
         ]
-      };
-
-    case REMOVE_FROM_LIST:
-      return {
-        ...state,
-        listItems: state.listItems.filter(function(item) {
-          return item.show.id !== Number(action.payload);
-        })
-      };
-
-    case UPDATE_SEARCH_RESULTS:
-      return {
-        ...state,
-        items: state.items.map(item =>
-          item.show.id === Number(action.payload)
-            ? { ...item, visible: true }
-            : item
-        )
-      };
-
-    case SAVE_NEW_LIST:
-      return {
-        ...state,
-        lists: [...state.lists, action.payload]
-      };
-
-    case RESET_SEARCH_PREVIEW:
-      return { ...state, items: [], listItems: [] };
-
-    case REMOVE_FROM_SAVED_LIST:
-      return {
-        ...state,
-        lists: [
-          ...state.lists.map(l => {
-            if (l.listID === Number(action.payload.list)) {
-              return {
-                ...l,
-                listShows: [
-                  ...l.listShows.filter(
-                    el => el.id !== Number(action.payload.show)
-                  )
-                ]
-              };
-            }
-            return l;
-          })
-        ]
-      };
-
-    case DELETE_LIST:
-      return {
-        ...state,
-        lists: state.lists.filter(function(list) {
-          return list.listID !== Number(action.payload);
-        })
       };
 
     case ADD_TO_SAVED_LIST:
@@ -182,6 +120,68 @@ export default function(state = initialState, action) {
             return l;
           })
         ]
+      };
+
+    case DELETE_LIST:
+      return {
+        ...state,
+        lists: state.lists.filter(function(list) {
+          return list.listID !== Number(action.payload);
+        })
+      };
+
+    case REMOVE_FROM_LIST:
+      return {
+        ...state,
+        listItems: state.listItems.filter(function(item) {
+          return item.show.id !== Number(action.payload);
+        })
+      };
+
+    case REMOVE_FROM_SAVED_LIST:
+      return {
+        ...state,
+        lists: [
+          ...state.lists.map(l => {
+            if (l.listID === Number(action.payload.list)) {
+              return {
+                ...l,
+                listShows: [
+                  ...l.listShows.filter(
+                    el => el.id !== Number(action.payload.show)
+                  )
+                ]
+              };
+            }
+            return l;
+          })
+        ]
+      };
+
+    case RESET_SEARCH_PREVIEW:
+      return { ...state, items: [], listItems: [] };
+
+    case SAVE_NEW_LIST:
+      return {
+        ...state,
+        lists: [...state.lists, action.payload]
+      };
+
+    case SAVE_RESULTS:
+      const addVisible = [...action.payload];
+      return {
+        ...state,
+        items: addVisible.map(el => ({ ...el, visible: true }))
+      };
+
+    case UPDATE_SEARCH_RESULTS:
+      return {
+        ...state,
+        items: state.items.map(item =>
+          item.show.id === Number(action.payload)
+            ? { ...item, visible: true }
+            : item
+        )
       };
 
     default:

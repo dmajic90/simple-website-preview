@@ -1,31 +1,26 @@
 import React, { Component } from 'react';
 import {
   Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
-  NavLink
+  NavLink,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler
 } from 'reactstrap';
 import scrollToComponent from 'react-scroll-to-component';
 
 export default class Navigation extends Component {
   constructor(props) {
     super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.state = {
       isOpen: false
     };
+
+    this.handleClick = this.handleClick.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
   handleClick(e, refname) {
     e.preventDefault();
     scrollToComponent(document.getElementById(refname), {
@@ -33,6 +28,12 @@ export default class Navigation extends Component {
       align: 'top',
       duration: 1500,
       ease: 'inCirc'
+    });
+  }
+
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
     });
   }
 

@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  Container,
-  Row,
-  Col,
   Button,
+  Col,
+  Container,
   Form,
   FormGroup,
-  Input
+  Input,
+  Row
 } from 'reactstrap';
 import {
   removeFromList,
-  saveNewList,
-  resetSearchAndPreview
+  resetSearchAndPreview,
+  saveNewList
 } from '../actions/listActions';
 import { updateSearchResults } from '../actions/searchActions';
 
@@ -22,8 +22,8 @@ class ListPreview extends Component {
     super(props);
     this.state = { listName: '' };
 
-    this.handleRemoveFromList = this.handleRemoveFromList.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleRemoveFromList = this.handleRemoveFromList.bind(this);
     this.handleSaveList = this.handleSaveList.bind(this);
   }
 
@@ -45,7 +45,7 @@ class ListPreview extends Component {
       listID: '',
       listName: this.state.listName,
       listShows: this.props.listItems.map(item => {
-        let list = {};
+        const list = {};
         list.name = item.show.name;
         list.id = item.show.id;
         list.year = item.show.premiered
@@ -54,6 +54,7 @@ class ListPreview extends Component {
         return list;
       })
     };
+
     this.props.saveNewList(newList);
     this.props.resetSearchAndPreview();
     this.setState({ listName: '' });
@@ -67,6 +68,7 @@ class ListPreview extends Component {
     }
 
     const sortedProps = this.props.listItems.sort(compare);
+
     const listItems = sortedProps.map(item => (
       <Row key={item.show.id} className='border-bottom border-primary'>
         <Col className='text-left'>
@@ -141,11 +143,11 @@ ListPreview.propTypes = {
 
 const mapStateToProps = state => ({
   listItems: state.results.listItems,
-  results: state.results.items,
-  lists: state.results.lists
+  lists: state.results.lists,
+  results: state.results.items
 });
 
 export default connect(
   mapStateToProps,
-  { removeFromList, updateSearchResults, saveNewList, resetSearchAndPreview }
+  { removeFromList, resetSearchAndPreview, saveNewList, updateSearchResults }
 )(ListPreview);

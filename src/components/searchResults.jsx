@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container, Row, Col, Button, Input, Label } from 'reactstrap';
+import { Button, Col, Container, Input, Label, Row } from 'reactstrap';
 import { addToList, addToSavedList } from '../actions/listActions';
 
 class SearchResults extends Component {
@@ -15,9 +15,11 @@ class SearchResults extends Component {
 
   handleAddToList(e) {
     e.preventDefault();
+
     const name = e.currentTarget.name;
     const newState = this.props.results.find(el => el.show.id === Number(name));
     newState.visible = false;
+
     this.setState(newState);
     if (this.state.selector === 0) {
       if (!this.props.listItems.find(item => item.show.id === Number(name))) {
@@ -30,8 +32,10 @@ class SearchResults extends Component {
 
   handleSelectorChange(e) {
     e.preventDefault();
+
     this.setState({ selector: e.target.value });
   }
+
   render() {
     const results = this.props.results.map(result => (
       <Row
@@ -106,9 +110,9 @@ SearchResults.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  results: state.results.items,
   listItems: state.results.listItems,
-  lists: state.results.lists
+  lists: state.results.lists,
+  results: state.results.items
 });
 
 export default connect(

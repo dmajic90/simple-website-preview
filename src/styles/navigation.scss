@@ -2,39 +2,32 @@
   .navbar-nav .nav-item .nav-link {
     font-weight: 800;
     letter-spacing: 0.05rem;
-    text-transform: uppercase;
     max-width: 75rem;
+    text-transform: uppercase;
   }
 }
 @media (min-width: 992px) {
   #sideNav {
-    text-align: center;
-    position: fixed;
-    top: 0;
-    left: 0;
     display: flex;
     flex-direction: column;
-    width: $sidebar-base-width;
     height: 100vh;
+    left: 0;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: $sidebar-base-width;
 
     .navbar-brand {
       display: flex;
       margin: auto auto 0;
       padding: 0.5rem;
-
-      .img-logo {
-        max-width: 10rem;
-        max-height: 10rem;
-        border: 0.5rem solid fade-out(#006600, 0.3);
-        background: lightgray;
-      }
     }
     .navbar-collapse {
-      display: flex;
       align-items: flex-start;
+      display: flex;
       flex-grow: 0;
-      width: 100%;
       margin-bottom: auto;
+      width: 100%;
 
       .navbar-nav {
         flex-direction: column;

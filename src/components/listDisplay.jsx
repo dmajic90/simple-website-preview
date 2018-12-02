@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Row, Col, Button, Form } from 'reactstrap';
-import { removeFromSavedList, deleteList } from '../actions/listActions';
+import { Button, Col, Container, Form, Row } from 'reactstrap';
+import { deleteList, removeFromSavedList } from '../actions/listActions';
 
 class ListDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.handleRemoveFromSavedList = this.handleRemoveFromSavedList.bind(this);
+
     this.handleDeleteList = this.handleDeleteList.bind(this);
+    this.handleRemoveFromSavedList = this.handleRemoveFromSavedList.bind(this);
   }
 
   componentDidMount() {
     this.setState(this.props.lists);
   }
+
   handleDeleteList(e) {
     const listID = e.target.getAttribute('data-list');
     this.props.deleteList(listID);
@@ -102,7 +104,8 @@ class ListDisplay extends Component {
 const mapStateToProps = state => ({
   lists: state.results.lists
 });
+
 export default connect(
   mapStateToProps,
-  { removeFromSavedList, deleteList }
+  { deleteList, removeFromSavedList }
 )(ListDisplay);
