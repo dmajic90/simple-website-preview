@@ -13,10 +13,10 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path='/'>
-              <div>
+              <React.Fragment>
                 <Navigation />
                 <Content />
-              </div>
+              </React.Fragment>
             </Route>
             <Route component={NoMatch} />
           </Switch>
