@@ -8,12 +8,19 @@ class ListDisplay extends Component {
     super(props);
     this.state = {};
 
+    this.compare = this.compare.bind(this);
     this.handleDeleteList = this.handleDeleteList.bind(this);
     this.handleRemoveFromSavedList = this.handleRemoveFromSavedList.bind(this);
   }
 
   componentDidMount() {
     this.setState(this.props.lists);
+  }
+
+  compare(a, b) {
+    if (a.name < b.name) return -1;
+    if (a.name > b.name) return 1;
+    return 0;
   }
 
   handleDeleteList(e) {
@@ -48,7 +55,7 @@ class ListDisplay extends Component {
           </Row>
           <Row />
 
-          {item.listShows.map(show => (
+          {item.listShows.sort(this.compare).map(show => (
             <Row key={show.id} className='border-bottom border-primary'>
               <Col className='text-left'>
                 <span className='d-inline-block aligned-mid'>{show.name}</span>
