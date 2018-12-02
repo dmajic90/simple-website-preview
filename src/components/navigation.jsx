@@ -45,7 +45,7 @@ export default class Navigation extends Component {
             e.preventDefault();
           }}
         >
-          <span className='d-block '>MENU</span>
+          <span className='d-block '>SHOW LISTS</span>
         </NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>

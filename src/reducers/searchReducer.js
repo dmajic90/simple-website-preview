@@ -6,7 +6,8 @@ import {
   SAVE_NEW_LIST,
   RESET_SEARCH_PREVIEW,
   REMOVE_FROM_SAVED_LIST,
-  DELETE_LIST
+  DELETE_LIST,
+  ADD_TO_SAVED_LIST
 } from '../actions/types';
 
 const initialState = {
@@ -14,69 +15,69 @@ const initialState = {
   listItems: [],
   lists: [
     {
-      listID: 0,
+      listID: 1,
       listName: 'Comedy',
       listShows: [
         {
           name: 'Married... with Children',
           id: 499,
-          year: 1987
+          premiered: '1987'
         },
         {
           name: 'Mr.Bean',
           id: 1719,
-          year: 1990
+          premiered: '1990'
         },
         {
           name: 'South Park',
           id: 112,
-          year: 1997
+          premiered: '1997'
         },
         {
           name: 'The Big Bang Theory',
           id: 66,
-          year: 2007
+          premiered: '2007'
         },
         {
           name: 'The Office',
           id: 526,
-          year: 2005
+          premiered: '2005'
         },
         {
           name: 'The Simpsons',
           id: 83,
-          year: 1989
+          premiered: '1989'
         }
       ]
     },
     {
-      listID: 1,
+      listID: 2,
       listName: 'Fantasy',
       listShows: [
         {
           name: 'Castlevania',
           id: 25242,
-          year: 2017
+          premiered: '2017'
         },
         {
           name: 'Game of Thrones',
           id: 82,
-          year: 2011
+          premiered: '2011'
         },
         {
           name: 'Lost',
           id: 123,
-          year: 2004
+          premiered: '2004'
         },
         {
           name: 'Sleepy Hollow',
           id: 42,
-          year: 2013
+          premiered: '2013'
         },
         {
           name: 'The Flash',
           id: 13,
-          year: 2014
+          premiered: '2014'
         }
       ]
     }
@@ -156,6 +157,31 @@ export default function(state = initialState, action) {
         lists: state.lists.filter(function(list) {
           return list.listID !== Number(action.payload);
         })
+      };
+
+    case ADD_TO_SAVED_LIST:
+      return {
+        ...state,
+        lists: [
+          ...state.lists.map(l => {
+            if (l.listID === Number(action.payload.list)) {
+              return {
+                ...l,
+                listShows: [
+                  ...l.listShows,
+                  ...state.items
+                    .filter(
+                      item => item.show.id === Number(action.payload.show)
+                    )
+                    .map(function(obj) {
+                      return obj.show;
+                    })
+                ]
+              };
+            }
+            return l;
+          })
+        ]
       };
 
     default:

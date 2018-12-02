@@ -52,7 +52,9 @@ class ListDisplay extends Component {
                 <span className='d-inline-block aligned-mid'>{show.name}</span>
               </Col>
               <Col className='d-none d-lg-block text-center col-2'>
-                <span className='d-inline-block aligned-mid'>{show.year}</span>
+                <span className='d-inline-block aligned-mid'>
+                  {show.premiered ? show.premiered.slice(0, 4) : 'Unknown'}
+                </span>
               </Col>
               <Col className='d-none d-lg-block text-center col-2'>
                 <Button

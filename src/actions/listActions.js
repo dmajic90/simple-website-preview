@@ -4,10 +4,11 @@ import {
   SAVE_NEW_LIST,
   RESET_SEARCH_PREVIEW,
   REMOVE_FROM_SAVED_LIST,
-  DELETE_LIST
+  DELETE_LIST,
+  ADD_TO_SAVED_LIST
 } from './types.js';
 
-let nextListID = 2;
+let nextListID = 3;
 
 export const addToList = showID => ({
   type: ADD_TO_LIST,
@@ -40,4 +41,9 @@ export const removeFromSavedList = (listID, showID) => ({
 export const deleteList = listID => ({
   type: DELETE_LIST,
   payload: listID
+});
+
+export const addToSavedList = (showID, listID) => ({
+  type: ADD_TO_SAVED_LIST,
+  payload: { list: listID, show: showID }
 });
