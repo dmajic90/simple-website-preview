@@ -42,7 +42,7 @@ class ListPreview extends Component {
   handleSaveList(e) {
     e.preventDefault();
     const newList = {
-      listID: this.props.lists.slice(-1)[0].listID + 1,
+      listID: '',
       listName: this.state.listName,
       listShows: this.props.listItems.map(item => {
         let list = {};

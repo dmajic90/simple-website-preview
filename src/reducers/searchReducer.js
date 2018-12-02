@@ -4,7 +4,9 @@ import {
   REMOVE_FROM_LIST,
   UPDATE_SEARCH_RESULTS,
   SAVE_NEW_LIST,
-  RESET_SEARCH_PREVIEW
+  RESET_SEARCH_PREVIEW,
+  REMOVE_FROM_SAVED_LIST,
+  DELETE_LIST
 } from '../actions/types';
 
 const initialState = {
@@ -12,7 +14,7 @@ const initialState = {
   listItems: [],
   lists: [
     {
-      listID: 1,
+      listID: 0,
       listName: 'Comedy',
       listShows: [
         {
@@ -48,7 +50,7 @@ const initialState = {
       ]
     },
     {
-      listID: 2,
+      listID: 1,
       listName: 'Fantasy',
       listShows: [
         {
@@ -127,6 +129,34 @@ export default function(state = initialState, action) {
 
     case RESET_SEARCH_PREVIEW:
       return { ...state, items: [], listItems: [] };
+
+    case REMOVE_FROM_SAVED_LIST:
+      return {
+        ...state,
+        lists: [
+          ...state.lists.map(l => {
+            if (l.listID === Number(action.payload.list)) {
+              return {
+                ...l,
+                listShows: [
+                  ...l.listShows.filter(
+                    el => el.id !== Number(action.payload.show)
+                  )
+                ]
+              };
+            }
+            return l;
+          })
+        ]
+      };
+
+    case DELETE_LIST:
+      return {
+        ...state,
+        lists: state.lists.filter(function(list) {
+          return list.listID !== Number(action.payload);
+        })
+      };
 
     default:
       return state;
