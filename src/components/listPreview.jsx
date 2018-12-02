@@ -22,9 +22,16 @@ class ListPreview extends Component {
     super(props);
     this.state = { listName: '' };
 
+    this.compare = this.compare.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleRemoveFromList = this.handleRemoveFromList.bind(this);
     this.handleSaveList = this.handleSaveList.bind(this);
+  }
+
+  compare(a, b) {
+    if (a.show.name < b.show.name) return -1;
+    if (a.show.name > b.show.name) return 1;
+    return 0;
   }
 
   handleNameChange(e) {
@@ -61,13 +68,7 @@ class ListPreview extends Component {
   }
 
   render() {
-    function compare(a, b) {
-      if (a.show.name < b.show.name) return -1;
-      if (a.show.name > b.show.name) return 1;
-      return 0;
-    }
-
-    const sortedProps = this.props.listItems.sort(compare);
+    const sortedProps = this.props.listItems.sort(this.compare);
 
     const listItems = sortedProps.map(item => (
       <Row key={item.show.id} className='border-bottom border-primary'>
